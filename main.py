@@ -11,6 +11,9 @@ score=0
 font = pygame.font.Font(None, 36)
 #clock.tick(60) tells Pygame: "Hey, wait a second... make sure this loop only runs 60 times per second.
 clock = pygame.time.Clock()
+p_surf = pygame.image.load('assets/player.jpg').convert() #image in assest folder
+
+player_img = pygame.transform.scale(p_surf, (50, 50)) # Now player_img is ready to use forever
 
 running = True
 while running:
@@ -43,11 +46,11 @@ while running:
         food_pos = [random.randint(0, 750), 0]
 
     #score board 
-    score_board = font.render(f"Iftar Items: {score}", True, (255, 255, 255))
+    score_board = font.render(f"SCORE: {score}", True, (255, 255, 255))
     screen.blit(score_board, (10, 10))
 
-    # 3. Rendering (Draw everything)
-    pygame.draw.rect(screen, (255, 0, 0), (player_pos[0], player_pos[1], 50, 50)) # Player
+    # 3. Rendering (Drawing)
+    screen.blit(player_img, (player_pos[0], player_pos[1]))
     pygame.draw.circle(screen, (255, 255, 0), (food_pos[0], food_pos[1]), 15)   # Food
     
     pygame.display.flip()
