@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vrat Quest (Fasting Simulator)</title>
+    <meta name="description" content="A high-paced, arcade-style catching game where you must maintain your fast!">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <!-- The Game Canvas -->
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+        <!-- UI Overlay -->
+        <div id="ui-layer">
+            <div class="hud">
+                <div class="hud-left">
+                    <span id="scoreDisplay">Score: 0</span>
+                </div>
+                <div class="hud-center">
+                    <div class="vrat-meter-container">
+                        <div class="vrat-meter-label">Vrat Meter</div>
+                        <div class="vrat-meter-bar">
+                            <div id="vratFill" class="vrat-meter-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hud-right">
+                    <span id="livesDisplay">Lives: ❤️❤️❤️</span>
+                </div>
+            </div>
+
+            <!-- Start Menu -->
+            <div id="startScreen" class="overlay screen active">
+                <h1 class="game-title">VRAT QUEST</h1>
+                <p class="subtitle">Fasting Simulator</p>
+                
+                <div class="instructions">
+                    <div class="inst-item">
+                        <img src="assets/sattvic.png" alt="Sattvic">
+                        <span><strong>Sattvic (Fruit)</strong><br>+Score & Fills Meter</span>
+                    </div>
+                    <div class="inst-item danger">
+                        <img src="assets/junk.png" alt="Junk">
+                        <span><strong>Junk Food</strong><br>-1 Life (Breaks Fast!)</span>
+                    </div>
+                    <div class="inst-item warn">
+                        <img src="assets/nonvrat.png" alt="Non-Vrat">
+                        <span><strong>Non-Vrat (Grains)</strong><br>-Score Penalty</span>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <p>Use <strong>Left / Right Arrows</strong> or <strong>Touch</strong> to move.</p>
+                </div>
+
+                <button id="startBtn" class="btn primary-btn">START FAST</button>
+            </div>
+
+            <!-- Game Over Menu -->
+            <div id="gameOverScreen" class="overlay screen hidden">
+                <h1 class="game-title danger-text">FAST BROKEN!</h1>
+                <div class="results">
+                    <p>Final Score: <span id="finalScore">0</span></p>
+                </div>
+                <button id="restartBtn" class="btn primary-btn">TRY AGAIN</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Assets Preemptively -->
+    <div style="display:none;">
+        <img id="bgImg" src="assets/background.png">
+        <img id="playerImg" src="assets/player.jpg">
+        <img id="sattvicImg" src="assets/sattvic.png">
+        <img id="junkImg" src="assets/junk.png">
+        <img id="nonvratImg" src="assets/nonvrat.png">
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+:root {
+    --primary: #FF9933; /* Saffron */
+    --secondary: #138808; /* India Green */
+    --danger: #FF3B30;
+    --warn: #FFCC00;
+    --bg-dark: rgba(15, 23, 42, 0.85);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --text-light: #F8FAFC;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+    user-select: none;
+}
+
+body {
+    background-color: #0f172a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    color: var(--text-light);
+}
+
+#game-container {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Let clicks pass to canvas if needed */
+}
+
+/* Heads Up Display */
+.hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 30px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+.hud-left, .hud-right {
+    font-size: 24px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.vrat-meter-container {
+    text-align: center;
+    background: rgba(0,0,0,0.4);
+    padding: 5px 15px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(4px);
+}
+
+.vrat-meter-label {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+
+.vrat-meter-bar {
+    width: 250px;
+    height: 20px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.5);
+    overflow: hidden;
+}
+
+.vrat-meter-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #FF9933, #FFD700);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px rgba(255, 153, 51, 0.8);
+}
+
+/* Overlays / Menus */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-dark);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    pointer-events: auto; /* Re-enable interaction for menus */
+    transition: opacity 0.3s ease;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.game-title {
+    font-size: 72px;
+    font-weight: 900;
+    background: linear-gradient(to bottom, #FFD700, #FF9933);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 24px;
+    color: #e2e8f0;
+    margin-bottom: 40px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.danger-text {
+    background: linear-gradient(to bottom, #ff6b6b, #c92a2a);
+    -webkit-background-clip: text;
+}
+
+.instructions {
+    display: flex;
+    gap: 30px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+}
+
+.inst-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 150px;
+}
+
+.inst-item img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    transition: transform 0.3s ease;
+}
+
+.inst-item:hover img {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.inst-item.danger span { color: #ff6b6b; }
+.inst-item.warn span { color: #FFCC00; }
+
+.controls {
+    margin-bottom: 40px;
+    font-size: 18px;
+    color: #cbd5e1;
+}
+
+.results {
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+
+.btn {
+    padding: 15px 40px;
+    font-size: 24px;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, #FF9933, #FF7700);
+    color: white;
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 153, 51, 0.5);
+}
+
+.primary-btn:active {
+    transform: translateY(1px);
+}
